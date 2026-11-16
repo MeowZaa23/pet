@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>รักแล้วอย่าทิ้ง | A Pet Is for Life</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Mitr:wght@400;500;600;700&family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#FDF2F6; --bg-alt:#FDF2F6; --card:#FFFFFF; --text:#4A3A46; --text-soft:#8A7484;
+  --brown:#C14A77; --accent:#A97BDB; --accent-deep:#9163C4; --border:#F3E1EE; --cream-deep:#FBE4EE;
+  --notready:#E8A79C; --unsure:#E8C97B; --ready:#9ED6B5;
+  --purple:#C9A8E8; --purple-deep:#B98FE0;
+  color-scheme: light;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme: dark;
+    --bg:#241A22; --bg-alt:#241A22; --card:#2E2130; --text:#F7E7F0; --text-soft:#D9BCD0;
+    --brown:#F0A8C4; --accent:#C9A8E8; --accent-deep:#DAC2F2; --border:#3F2C3A; --cream-deep:#3A2735;
+    --notready:#F0B7AC; --unsure:#F0D98C; --ready:#AEE3C4;
+    --purple:#C9A8E8; --purple-deep:#DAC2F2;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme: dark;
+  --bg:#241A22; --bg-alt:#241A22; --card:#2E2130; --text:#F7E7F0; --text-soft:#D9BCD0;
+  --brown:#F0A8C4; --accent:#C9A8E8; --accent-deep:#DAC2F2; --border:#3F2C3A; --cream-deep:#3A2735;
+  --notready:#F0B7AC; --unsure:#F0D98C; --ready:#AEE3C4;
+  --purple:#C9A8E8; --purple-deep:#DAC2F2;
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth; scroll-padding-top:calc(76px + env(safe-area-inset-top,0px));}
+body{margin:0; background:var(--bg); color:var(--text); font-family:'Sarabun',Tahoma,sans-serif; line-height:1.7; font-size:16px;}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:40;background:var(--bg-alt);}
+@media (prefers-reduced-motion: reduce){ *{animation-duration:0.01ms !important; transition-duration:0.01ms !important; scroll-behavior:auto !important;} }
+h1,h2,h3,h4{font-family:'Mitr',Tahoma,sans-serif; font-weight:600; margin:0 0 .5em; color:var(--brown);}
+p{margin:0 0 1em; color:var(--text-soft); max-width:62ch;}
+a{color:var(--accent-deep);}
+img,svg{max-width:100%;}
+.wrap{max-width:1080px; margin:0 auto; padding:0 24px;}
+section{padding:72px 0;}
+.alt{background:var(--bg-alt);}
+
+/* nav */
+header{position:sticky; top:env(safe-area-inset-top,0px); z-index:50; background:var(--bg-alt); border-bottom:1px solid var(--border);}
+.navbar{display:flex; align-items:center; justify-content:space-between; max-width:1080px; margin:0 auto; padding:14px 24px;}
+.brand{display:flex; align-items:center; gap:10px; font-family:'Mitr',sans-serif; font-weight:600; font-size:1.15rem; color:var(--brown); text-decoration:none;}
+.brand svg{width:34px; height:34px;}
+.nav-toggle{display:none; flex-direction:column; gap:5px; background:none; border:none; cursor:pointer; padding:8px;}
+.nav-toggle span{width:24px; height:2px; background:var(--brown); border-radius:2px;}
+.nav-list{display:flex; flex-wrap:wrap; gap:4px; list-style:none; margin:0; padding:0; align-items:center;}
+.nav-list a{text-decoration:none; color:var(--text); font-size:.92rem; padding:8px 10px; border-radius:20px; transition:background .2s,color .2s;}
+.nav-list a:hover, .nav-list a:focus-visible{background:var(--cream-deep); color:var(--accent-deep);}
+.nav-cta{background:var(--accent); color:#fff !important; padding:9px 16px !important; border-radius:20px !important; font-weight:500;}
+.nav-cta:hover{background:var(--accent-deep);}
+
+/* buttons */
+.btn{display:inline-block; padding:13px 26px; border-radius:30px; text-decoration:none; font-weight:500; font-family:'Sarabun',sans-serif; font-size:1rem; border:2px solid transparent; cursor:pointer; transition:transform .15s, background .2s, border-color .2s;}
+.btn:hover{transform:translateY(-2px);}
+.btn:focus-visible{outline:3px solid var(--accent-deep); outline-offset:2px;}
+.btn-primary{background:var(--accent); color:#fff;}
+.btn-primary:hover{background:var(--accent-deep);}
+.btn-outline{border-color:var(--brown); color:var(--brown); background:transparent;}
+.btn-outline:hover{background:var(--cream-deep);}
+.btn-row{display:flex; gap:14px; flex-wrap:wrap; margin-top:20px;}
+
+/* hero */
+.hero{display:grid; grid-template-columns:1.1fr .9fr; gap:40px; align-items:center; padding-top:56px;}
+.hero h1{font-size:clamp(1.9rem,4vw,2.9rem); line-height:1.3;}
+.eyebrow{color:var(--accent-deep); font-weight:500; margin-bottom:10px;}
+.slogan{font-family:'Mitr',sans-serif; color:var(--brown); font-size:1.05rem; border-left:4px solid var(--accent); padding-left:14px; margin-top:24px;}
+.hero-art{animation:rise .7s ease-out;}
+@keyframes rise{from{opacity:0; transform:translateY(16px);} to{opacity:1; transform:translateY(0);}}
+
+/* grids */
+.grid3{display:grid; grid-template-columns:repeat(3,1fr); gap:22px; margin-top:28px;}
+.grid2{display:grid; grid-template-columns:1fr 1fr; gap:22px; margin-top:28px;}
+.grid4{display:grid; grid-template-columns:repeat(4,1fr); gap:18px; margin-top:28px;}
+.card{background:var(--card); border:1px solid var(--border); border-radius:18px; padding:26px;}
+.card h3{font-size:1.1rem; margin-bottom:.4em;}
+.card p{margin:0; font-size:.95rem;}
+.icon{width:40px; height:40px; color:var(--accent-deep); margin-bottom:12px;}
+
+/* split row */
+.split{display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:center;}
+.split.rev .split-art{order:2;}
+
+/* five whys / timeline (true sequences) */
+.sequence{list-style:none; margin:32px 0 0; padding:0; border-left:2px solid var(--border); max-width:70ch;}
+.sequence li{position:relative; padding:0 0 30px 28px;}
+.sequence li:last-child{padding-bottom:0;}
+.sequence li::before{content:attr(data-n); position:absolute; left:-15px; top:0; width:28px; height:28px; border-radius:50%; background:var(--accent); color:#fff; font-size:.8rem; display:flex; align-items:center; justify-content:center; font-family:'Mitr',sans-serif;}
+.sequence h4{margin:0 0 4px; font-size:1rem; color:var(--brown);}
+.sequence p{margin:0; font-size:.93rem;}
+
+/* evidence */
+.ref-card{background:var(--card); border:1px solid var(--border); border-radius:14px; padding:20px 22px; margin-bottom:14px;}
+.ref-card .src{font-size:.78rem; text-transform:uppercase; letter-spacing:.04em; color:var(--accent-deep); font-weight:600;}
+.ref-note{font-size:.85rem; color:var(--text-soft); font-style:italic;}
+
+/* stakeholders */
+.stake-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin-top:28px;}
+.stake-grid .card.center{border-color:var(--purple); border-width:2px;}
+
+/* sdg */
+.sdg-card{display:flex; gap:16px; align-items:flex-start;}
+.sdg-num{flex:none; width:52px; height:52px; border-radius:12px; background:var(--purple); color:#fff; font-family:'Mitr',sans-serif; font-weight:700; display:flex; align-items:center; justify-content:center; font-size:1.2rem;}
+
+/* quiz */
+.quiz-form{margin-top:28px; display:flex; flex-direction:column; gap:22px;}
+.q-item{background:var(--card); border:1px solid var(--border); border-radius:16px; padding:18px 22px;}
+.q-item p{color:var(--text); font-weight:500; margin:0 0 12px; max-width:none;}
+.opts{display:flex; gap:10px; flex-wrap:wrap;}
+.opts input{position:absolute; opacity:0; pointer-events:none;}
+.opts label{padding:8px 16px; border-radius:20px; border:1.5px solid var(--border); cursor:pointer; font-size:.9rem; transition:all .15s;}
+.opts input:checked + label{background:var(--accent); border-color:var(--accent); color:#fff;}
+.opts label:hover{border-color:var(--accent);}
+.quiz-result{margin-top:22px; padding:20px 22px; border-radius:16px; font-weight:500; border:1.5px solid;}
+.quiz-result.warn{border-color:var(--unsure); background:color-mix(in srgb, var(--unsure) 15%, transparent);}
+.quiz-result.result-a{border-color:var(--ready); background:color-mix(in srgb, var(--ready) 15%, transparent);}
+.quiz-result.result-b{border-color:var(--unsure); background:color-mix(in srgb, var(--unsure) 15%, transparent);}
+.quiz-result.result-c{border-color:var(--notready); background:color-mix(in srgb, var(--notready) 15%, transparent);}
+.quiz-disclaimer{font-size:.82rem; color:var(--text-soft); font-style:italic; margin-top:16px;}
+.share-row{margin-top:48px; padding-top:40px; border-top:1px solid var(--border);}
+#share-status{font-size:.88rem; color:var(--accent-deep); margin-top:10px; min-height:1.2em;}
+
+/* credits */
+.disclosure{background:var(--card); border:1px solid var(--border); border-radius:16px; padding:24px 26px;}
+.disclosure dt{font-weight:600; color:var(--brown); margin-top:14px;}
+.disclosure dt:first-child{margin-top:0;}
+.disclosure dd{margin:4px 0 0; color:var(--text-soft);}
+.placeholder{border:1.5px dashed var(--border); border-radius:12px; padding:16px 18px; font-size:.9rem; color:var(--text-soft); margin-top:16px;}
+
+footer{background:var(--brown); color:#fff; padding:48px 0 32px;}
+footer h3{color:#fff;}
+footer p, footer a{color:#F0E2D2;}
+.foot-links{display:flex; gap:18px; flex-wrap:wrap; list-style:none; padding:0; margin:18px 0;}
+.foot-links a{text-decoration:none;}
+.foot-links a:hover{text-decoration:underline;}
+.foot-bottom{font-size:.82rem; opacity:.8; margin-top:24px; border-top:1px solid rgba(255,255,255,.2); padding-top:18px;}
+
+@media (max-width:860px){
+  .hero, .split, .split.rev .split-art{grid-template-columns:1fr;}
+  .split.rev .split-art{order:0;}
+  .grid3, .stake-grid, .grid4{grid-template-columns:1fr 1fr;}
+  .grid2{grid-template-columns:1fr;}
+}
+@media (max-width:640px){
+  section{padding:52px 0;}
+  .nav-toggle{display:flex;}
+  .nav-list{position:fixed; top:calc(64px + env(safe-area-inset-top,0px)); left:0; right:0; background:var(--bg-alt); flex-direction:column; align-items:stretch; padding:10px 20px 20px; border-bottom:1px solid var(--border); display:none; max-height:75vh; overflow:auto;}
+  .nav-list.open{display:flex;}
+  .nav-list a{padding:12px 10px;}
+  .grid3, .stake-grid, .grid4{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="navbar" aria-label="เมนูหลัก">
+    <a href="#home" class="brand">
+      <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="23" fill="var(--cream-deep)"/><path d="M24 34c-5-4.5-9-7.6-9-11.6A4.9 4.9 0 0 1 20 17.5c1.8 0 3.3 1 4 2.4.7-1.4 2.2-2.4 4-2.4A4.9 4.9 0 0 1 33 22.4C33 26.4 29 29.5 24 34Z" fill="var(--accent)"/></svg>
+      รักแล้วอย่าทิ้ง
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-label="เปิดเมนู" aria-expanded="false"><span></span><span></span><span></span></button>
+    <ul class="nav-list" id="navList">
+      <li><a href="#home">หน้าแรก</a></li>
+      <li><a href="#about">ปัญหา</a></li>
+      <li><a href="#evidence">ข้อมูล</a></li>
+      <li><a href="#impacts">ผลกระทบ</a></li>
+      <li><a href="#stakeholders">ผู้เกี่ยวข้อง</a></li>
+      <li><a href="#sdgs">SDGs</a></li>
+      <li><a href="#campaign">แคมเปญ</a></li>
+      <li><a href="#activities">กิจกรรม</a></li>
+      <li><a href="#trial">ทดลองเลี้ยง</a></li>
+      <li><a href="#references">อ้างอิง</a></li>
+      <li><a href="#credits">เครดิต</a></li>
+      <li><a href="#action" class="nav-cta">พร้อมเลี้ยงจริงหรือยัง?</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+
+<!-- 1 HOME -->
+<section id="home">
+  <div class="wrap hero">
+    <div>
+      <p class="eyebrow">BU4Global Issue Campaign · GE105</p>
+      <h1>รักเขา ต้องพร้อมดูแลเขาไปตลอดชีวิต</h1>
+      <p>ก่อนจะรับใครสักตัวเข้ามาในชีวิต ลองถามตัวเองให้แน่ใจว่าเราพร้อมดูแลเขา ไม่ใช่แค่ในวันที่เขาน่ารัก แต่รวมถึงทุกวันที่เขาต้องการเรา</p>
+      <p class="slogan">“สัตว์เลี้ยงไม่ใช่ของเล่น แต่เป็นหนึ่งชีวิตที่ต้องรับผิดชอบจนถึงวันสุดท้าย”</p>
+      <div class="btn-row">
+        <a href="#about" class="btn btn-primary">ทำความรู้จักกับปัญหา</a>
+        <a href="#action" class="btn btn-outline">พร้อมเลี้ยงจริงหรือยัง?</a>
+      </div>
+    </div>
+    <div class="hero-art">
+      <svg viewBox="0 0 360 290" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="180" cy="150" r="140" fill="var(--cream-deep)"/>
+        <path d="M172 92c-7-12-24-9-24 3c0 12 24 26 24 26s24-14 24-26c0-12-17-15-24-3z" fill="#F7B9D1"/>
+        <path d="M150 170q-32 10-37 38" stroke="#E3D3F5" stroke-width="16" fill="none" stroke-linecap="round"/>
+        <path d="M210 170q32 10 37 38" stroke="#E3D3F5" stroke-width="16" fill="none" stroke-linecap="round"/>
+        <rect x="140" y="148" width="80" height="88" rx="38" fill="#E3D3F5"/>
+        <circle cx="180" cy="128" r="34" fill="#FBE0C8"/>
+        <path d="M146 126c0-20 15-36 34-36s34 16 34 36c-10-8-22-12-34-12s-24 4-34 12z" fill="#B98FE0"/>
+        <path d="M168 130q4 4 8 0" stroke="#5B4B63" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+        <path d="M184 130q4 4 8 0" stroke="#5B4B63" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+        <circle cx="162" cy="136" r="4" fill="#F7B9D1" opacity=".7"/><circle cx="198" cy="136" r="4" fill="#F7B9D1" opacity=".7"/>
+        <path d="M172 140q8 6 16 0" stroke="#A8728F" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+        <ellipse cx="78" cy="222" rx="48" ry="42" fill="#F7B9D1"/>
+        <circle cx="70" cy="172" r="36" fill="#F7B9D1"/>
+        <ellipse cx="43" cy="165" rx="14" ry="22" fill="#F2A0C2" transform="rotate(-20 43 165)"/>
+        <ellipse cx="97" cy="165" rx="14" ry="22" fill="#F2A0C2" transform="rotate(20 97 165)"/>
+        <circle cx="59" cy="170" r="3.5" fill="#5B4B63"/><circle cx="81" cy="170" r="3.5" fill="#5B4B63"/>
+        <ellipse cx="70" cy="183" rx="5" ry="4" fill="#5B4B63"/>
+        <path d="M62 189q8 7 16 0" stroke="#A8728F" stroke-width="2" fill="none" stroke-linecap="round"/>
+        <ellipse cx="282" cy="222" rx="46" ry="40" fill="#AEDBF2"/>
+        <circle cx="290" cy="172" r="34" fill="#AEDBF2"/>
+        <polygon points="267,149 275,119 287,147" fill="#8FCBEA"/>
+        <polygon points="313,149 305,119 293,147" fill="#8FCBEA"/>
+        <circle cx="281" cy="170" r="3.5" fill="#5B4B63"/><circle cx="299" cy="170" r="3.5" fill="#5B4B63"/>
+        <polygon points="287,181 293,181 290,185" fill="#5B4B63"/>
+        <path d="M265 177h-14M265 183h-14M315 177h14M315 183h14" stroke="#8FCBEA" stroke-width="2" stroke-linecap="round"/>
+        <path d="M323 217q26-6 20-34" stroke="#AEDBF2" stroke-width="12" fill="none" stroke-linecap="round"/>
+      </svg>
+    </div>
+  </div>
+
+  <div class="wrap" style="padding-top:20px;">
+    <div class="split">
+      <div>
+        <h2>เพราะการรับมาเลี้ยง คือการรับผิดชอบชีวิตหนึ่ง</h2>
+        <p>สัตว์เลี้ยงต้องการมากกว่าความรักในวันแรก พวกเขาต้องการอาหาร น้ำ ที่พักพิง การรักษาพยาบาล เวลา และความเอาใจใส่อย่างต่อเนื่อง การเตรียมความพร้อมก่อนเลี้ยงจึงเป็นจุดเริ่มต้นสำคัญในการป้องกันปัญหาการทอดทิ้งสัตว์เลี้ยง</p>
+      </div>
+      <div class="grid2" style="margin-top:0;">
+        <div class="card"><h3>เข้าใจปัญหา</h3><p>รู้จักสาเหตุของการทอดทิ้งสัตว์เลี้ยง</p></div>
+        <div class="card"><h3>เรียนรู้ความรับผิดชอบ</h3><p>ประเมินความพร้อมก่อนรับสัตว์มาเลี้ยง</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 2 ABOUT THE ISSUE -->
+<section id="about" class="alt">
+  <div class="wrap">
+    <h2>การทอดทิ้งสัตว์เลี้ยง ปัญหาที่เริ่มต้นได้ตั้งแต่ก่อนรับมาเลี้ยง</h2>
+    <p>ปัญหาการทอดทิ้งสัตว์เลี้ยงเกิดขึ้นเมื่อเจ้าของไม่ต้องการหรือไม่สามารถดูแลสัตว์ต่อได้ จึงปล่อยสัตว์ออกจากความดูแล หรือส่งต่อโดยขาดการวางแผนที่เหมาะสม ปัญหานี้สะท้อนถึงการตัดสินใจเลี้ยงสัตว์โดยไม่ได้เตรียมความพร้อมในระยะยาว ทั้งด้านเวลา ค่าใช้จ่าย ที่อยู่อาศัย สุขภาพ และความรับผิดชอบ ผลกระทบไม่ได้เกิดขึ้นกับสัตว์เพียงอย่างเดียว แต่ยังเชื่อมโยงไปถึงครอบครัว ชุมชน ศูนย์พักพิง และกลุ่มช่วยเหลือสัตว์</p>
+
+    <h3 style="margin-top:40px;">ทำไมสัตว์เลี้ยงจึงถูกทอดทิ้ง?</h3>
+    <div class="grid3">
+      <div class="card"><h3>ภาระค่าใช้จ่าย</h3><p>ไม่สามารถรับผิดชอบค่าอาหารและค่าใช้จ่ายในการดูแลได้อย่างต่อเนื่อง</p></div>
+      <div class="card"><h3>ไม่มีเวลา</h3><p>ไม่สามารถจัดสรรเวลาเพื่อดูแลสัตว์เลี้ยงได้อย่างเหมาะสม</p></div>
+      <div class="card"><h3>ที่อยู่อาศัยไม่เหมาะสม</h3><p>สภาพแวดล้อมหรือข้อจำกัดด้านที่พักทำให้ไม่สามารถเลี้ยงต่อได้</p></div>
+      <div class="card"><h3>ขาดการวางแผน</h3><p>ตัดสินใจเลี้ยงตามความชอบโดยไม่ได้ประเมินความพร้อมในระยะยาว</p></div>
+      <div class="card"><h3>ขาดความรู้</h3><p>ไม่เข้าใจภาระหน้าที่และความรับผิดชอบที่มาพร้อมกับการเลี้ยงสัตว์</p></div>
+    </div>
+
+    <h3 style="margin-top:48px;">Five Whys: วิเคราะห์รากของปัญหา</h3>
+    <ol class="sequence">
+      <li data-n="1"><h4>ทำไมสัตว์เลี้ยงถึงถูกทอดทิ้ง?</h4><p>เพราะเจ้าของไม่ต้องการเลี้ยงต่อ หรือไม่สามารถดูแลสัตว์เลี้ยงได้</p></li>
+      <li data-n="2"><h4>ทำไมเจ้าของถึงไม่สามารถดูแลต่อได้?</h4><p>เพราะมีภาระค่าใช้จ่าย ไม่มีเวลา หรือรู้สึกว่าการเลี้ยงสัตว์เป็นภาระ</p></li>
+      <li data-n="3"><h4>ทำไมเจ้าของถึงไม่พร้อมรับภาระเหล่านี้?</h4><p>เพราะบางคนตัดสินใจเลี้ยงตามความชอบ โดยไม่ได้วางแผนระยะยาว</p></li>
+      <li data-n="4"><h4>ทำไมจึงไม่มีการวางแผนก่อนเลี้ยง?</h4><p>เพราะขาดความรู้และความเข้าใจเกี่ยวกับความรับผิดชอบในการเลี้ยงสัตว์</p></li>
+      <li data-n="5"><h4>ทำไมถึงขาดความรู้ความเข้าใจ?</h4><p>เพราะยังขาดการให้ความรู้และการรณรงค์เรื่องการเลี้ยงสัตว์อย่างรับผิดชอบอย่างทั่วถึง</p></li>
+    </ol>
+    <p style="margin-top:28px; color:var(--brown); font-weight:500;">การป้องกันการทอดทิ้งสัตว์เริ่มต้นได้ตั้งแต่ก่อนตัดสินใจรับสัตว์มาเลี้ยง ด้วยการเตรียมความพร้อมและทำความเข้าใจความรับผิดชอบของตนเอง</p>
+  </div>
+</section>
+
+<!-- 3 EVIDENCE & FACTS -->
+<section id="evidence">
+  <div class="wrap">
+    <h2>เข้าใจปัญหาด้วยข้อมูลที่ตรวจสอบได้</h2>
+    <p>การทำความเข้าใจปัญหาการทอดทิ้งสัตว์เลี้ยงจำเป็นต้องอาศัยข้อมูลจากแหล่งที่น่าเชื่อถือ หน้านี้รวบรวมแหล่งข้อมูลด้านการจัดการประชากรสุนัขและโรคพิษสุนัขบ้า เพื่อสนับสนุนการเรียนรู้เกี่ยวกับการดูแลสัตว์และความรับผิดชอบต่อสังคม</p>
+
+    <div style="margin-top:28px;">
+      <div class="ref-card"><p class="src">WOAH · World Organisation for Animal Health</p><h3>Dog Population Management</h3><p>Terrestrial Animal Health Code, Chapter 7.7</p></div>
+      <div class="ref-card"><p class="src">WHO · World Health Organization</p><h3>Rabies — South-East Asia Region</h3><p>ข้อมูลภาพรวมด้านโรคพิษสุนัขบ้าในภูมิภาคเอเชียตะวันออกเฉียงใต้</p></div>
+      <div class="ref-card"><p class="src">WHO · World Health Organization (2016)</p><h3>Global Framework to Eliminate Human Rabies Transmitted by Dogs by 2030</h3></div>
+    </div>
+    <p class="ref-note">หมายเหตุ: ลิงก์ไปยังเอกสารต้นฉบับจะเพิ่มเมื่อตรวจสอบความถูกต้องของ URL แล้ว ข้อมูลสถิติทั้งหมดจะแสดงเฉพาะเมื่อมีแหล่งอ้างอิงรองรับเท่านั้น</p>
+  </div>
+</section>
+
+<!-- 4 IMPACTS -->
+<section id="impacts" class="alt">
+  <div class="wrap">
+    <h2>เมื่อสัตว์เลี้ยงถูกทอดทิ้ง ผลกระทบไม่ได้หยุดอยู่แค่ชีวิตหนึ่ง</h2>
+    <div class="grid2">
+      <div class="card">
+        <h3>ผลกระทบระยะสั้น</h3>
+        <p>สัตว์ขาดอาหารและน้ำ<br>ขาดที่พักพิงและการรักษาพยาบาล<br>เกิดความเครียดหรือได้รับอันตรายจากสภาพแวดล้อม<br>ชุมชนอาจได้รับผลกระทบจากสัตว์ที่ไม่มีผู้ดูแล</p>
+      </div>
+      <div class="card">
+        <h3>ผลกระทบระยะยาว</h3>
+        <p>จำนวนสัตว์ไร้บ้านเพิ่มขึ้น<br>ภาระของกลุ่มช่วยเหลือสัตว์และหน่วยงานที่เกี่ยวข้องเพิ่มขึ้น<br>เกิดปัญหาการสืบพันธุ์ที่ไม่มีการควบคุม<br>เกิดวงจรการรับเลี้ยงและทอดทิ้งซ้ำ</p>
+      </div>
+    </div>
+    <p style="margin-top:28px; color:var(--brown); font-weight:500;">การตัดสินใจที่ไม่ได้เตรียมพร้อม อาจส่งผลต่อชีวิตของสัตว์และผู้คนรอบข้างในระยะยาว การคิดให้รอบคอบก่อนรับมาเลี้ยงจึงเป็นส่วนสำคัญของการป้องกันปัญหา</p>
+  </div>
+</section>
+
+<!-- 5 STAKEHOLDERS -->
+<section id="stakeholders">
+  <div class="wrap">
+    <h2>การแก้ปัญหาต้องอาศัยความร่วมมือจากทุกฝ่าย</h2>
+    <p>สัตว์เลี้ยงอยู่ในตำแหน่งสำคัญที่สุดของแผนที่ผู้มีส่วนเกี่ยวข้องทั้งหมด — ทุกฝ่ายรอบตัวมีบทบาทที่ส่งผลต่อคุณภาพชีวิตของพวกเขาโดยตรงหรือโดยอ้อม</p>
+    <div class="stake-grid">
+      <div class="card center"><h3>สัตว์เลี้ยง</h3><p>ผู้ได้รับผลกระทบโดยตรงจากการขาดผู้ดูแล ต้องได้รับอาหาร การดูแลสุขภาพ และความปลอดภัย</p></div>
+      <div class="card"><h3>เจ้าของ / ผู้เลี้ยง</h3><p>ผู้ตัดสินใจรับสัตว์มาเลี้ยง มีหน้าที่ประเมินความพร้อมและรับผิดชอบตลอดช่วงชีวิตของสัตว์</p></div>
+      <div class="card"><h3>ครอบครัวและชุมชน</h3><p>ช่วยสร้างสภาพแวดล้อมที่เหมาะสม และอาจได้รับผลกระทบจากปัญหาสัตว์ไร้บ้าน</p></div>
+      <div class="card"><h3>องค์กรช่วยเหลือสัตว์ / ศูนย์พักพิง</h3><p>รับดูแลสัตว์ ประสานการรักษา หาบ้านใหม่ และให้ความรู้แก่ประชาชน</p></div>
+      <div class="card"><h3>ภาครัฐและหน่วยงานท้องถิ่น</h3><p>มีบทบาทด้านนโยบาย การจัดการสัตว์ในพื้นที่ การสาธารณสุข และการรณรงค์</p></div>
+      <div class="card"><h3>สัตวแพทย์และผู้เชี่ยวชาญ</h3><p>ให้ความรู้เกี่ยวกับสุขภาพ วัคซีน การทำหมัน และการดูแลสัตว์อย่างเหมาะสม</p></div>
+    </div>
+    <p style="margin-top:28px; color:var(--brown); font-weight:500;">ทุกฝ่ายมีบทบาทแตกต่างกัน แต่สามารถร่วมกันสร้างสังคมที่ให้ความสำคัญกับสวัสดิภาพสัตว์และความรับผิดชอบในการเลี้ยงสัตว์ได้</p>
+  </div>
+</section>
+
+<!-- 6 SDGs -->
+<section id="sdgs" class="alt">
+  <div class="wrap">
+    <h2>การดูแลสัตว์อย่างรับผิดชอบ เชื่อมโยงกับสังคมที่ยั่งยืน</h2>
+    <div class="grid3">
+      <div class="card sdg-card"><div class="sdg-num">3</div><div><h3>สุขภาพและความเป็นอยู่ที่ดี</h3><p>การเลี้ยงสัตว์อย่างรับผิดชอบและการจัดการสัตว์ไร้บ้านอย่างเหมาะสมช่วยสนับสนุนสุขอนามัยและสภาพแวดล้อมที่ปลอดภัยสำหรับคนและสัตว์</p></div></div>
+      <div class="card sdg-card"><div class="sdg-num">11</div><div><h3>เมืองและชุมชนที่ยั่งยืน</h3><p>การลดการทอดทิ้งสัตว์และส่งเสริมความรับผิดชอบของเจ้าของช่วยลดปัญหาสัตว์ไร้บ้าน และส่งเสริมการอยู่ร่วมกันในชุมชนอย่างเหมาะสม</p></div></div>
+      <div class="card sdg-card"><div class="sdg-num">17</div><div><h3>หุ้นส่วนความร่วมมือเพื่อการพัฒนาที่ยั่งยืน</h3><p>การแก้ปัญหาจำเป็นต้องอาศัยความร่วมมือจากประชาชน เจ้าของสัตว์ สถานศึกษา สัตวแพทย์ องค์กรช่วยเหลือสัตว์ และหน่วยงานรัฐ</p></div></div>
+    </div>
+    <p style="margin-top:28px; color:var(--brown); font-weight:500;">การเปลี่ยนแปลงที่ยั่งยืนเริ่มจากความรับผิดชอบของแต่ละคน และเติบโตได้ด้วยความร่วมมือของทุกฝ่าย</p>
+  </div>
+</section>
+
+<!-- 7 OUR CAMPAIGN -->
+<section id="campaign">
+  <div class="wrap">
+    <h2>รู้จักแคมเปญ รักแล้วอย่าทิ้ง</h2>
+    <div class="split">
+      <div>
+        <p><strong style="color:var(--brown);">แนวคิดโลโก้:</strong> ภาพสุนัขและแมวร่วมกับสัญลักษณ์หัวใจ สื่อถึงความรักที่มาพร้อมความรับผิดชอบ</p>
+        <p><strong style="color:var(--brown);">เป้าหมาย:</strong> สร้างความตระหนักรู้เกี่ยวกับความรับผิดชอบในการเลี้ยงสัตว์ ลดการตัดสินใจเลี้ยงโดยไม่พร้อม และช่วยป้องกันปัญหาการทอดทิ้งสัตว์เลี้ยง</p>
+        <p><strong style="color:var(--brown);">กลุ่มเป้าหมาย:</strong> วัยรุ่นและนักศึกษาที่สนใจเลี้ยงสุนัขหรือแมว (หลัก) และเจ้าของสัตว์เลี้ยง/ประชาชนทั่วไป (รอง)</p>
+        <p class="slogan">“สัตว์เลี้ยงไม่ใช่ของเล่น แต่เป็นหนึ่งชีวิตที่ต้องรับผิดชอบจนถึงวันสุดท้าย”</p>
+      </div>
+      <div class="grid2" style="margin-top:0;">
+        <div class="card"><h3>TikTok</h3><p>คลิปสั้นรณรงค์ไม่ทอดทิ้งสัตว์ และคำถาม “พร้อมเลี้ยงจริงหรือยัง?”</p></div>
+        <div class="card"><h3>Instagram</h3><p>โปสเตอร์ อินโฟกราฟิก เนื้อหาเกี่ยวกับความพร้อมก่อนเลี้ยง</p></div>
+        <div class="card"><h3>Facebook</h3><p>ข้อมูลการดูแลสัตว์ เรื่องราวรณรงค์ และการแบ่งปันความรู้</p></div>
+        <div class="card"><h3>Website</h3><p>ศูนย์รวมข้อมูลปัญหา ผลกระทบ แหล่งอ้างอิง และกิจกรรม</p></div>
+      </div>
+    </div>
+
+    <h3 style="margin-top:48px;">แผนกิจกรรมรณรงค์ 4 สัปดาห์</h3>
+    <ol class="sequence">
+      <li data-n="1"><h4>สัปดาห์ที่ 1</h4><p>ให้ความรู้เกี่ยวกับปัญหาการทอดทิ้งสัตว์ สาเหตุ และผลกระทบ</p></li>
+      <li data-n="2"><h4>สัปดาห์ที่ 2</h4><p>เผยแพร่คลิปและโปสเตอร์รณรงค์ผ่าน TikTok, Instagram และ Facebook</p></li>
+      <li data-n="3"><h4>สัปดาห์ที่ 3</h4><p>จัดกิจกรรมและแบบทดสอบความพร้อมก่อนเลี้ยงสัตว์ผ่านเว็บไซต์และสื่อสังคมออนไลน์</p></li>
+      <li data-n="4"><h4>สัปดาห์ที่ 4</h4><p>สรุปผลการรณรงค์ รวบรวมการมีส่วนร่วม และเผยแพร่ข้อคิดจากแคมเปญ</p></li>
+    </ol>
+  </div>
+</section>
+
+<!-- NEW: ACTIVITIES -->
+<section id="activities">
+  <div class="wrap">
+    <h2>กิจกรรมของแคมเปญ</h2>
+    <p>นอกจากสื่อออนไลน์ แคมเปญยังจัดกิจกรรมให้ผู้สนใจได้พบปะและเรียนรู้แบบตัวต่อตัว เพื่อสนับสนุนการตัดสินใจเลี้ยงสัตว์อย่างรับผิดชอบ</p>
+    <div class="grid2">
+      <div class="card"><h3>Pet Meeting</h3><p>กิจกรรมนัดพบปะระหว่างเจ้าของสัตว์เลี้ยงและผู้สนใจ เพื่อแลกเปลี่ยนประสบการณ์การดูแลสัตว์</p></div>
+      <div class="card"><h3>วันดูตัวสัตว์</h3><p>เปิดให้ผู้สนใจมาพบและทำความรู้จักกับสัตว์ที่รอบ้านใหม่ ก่อนตัดสินใจรับไปเลี้ยง</p></div>
+      <div class="card"><h3>ฉีดวัคซีนฟรี</h3><p>จุดบริการฉีดวัคซีนป้องกันโรคพื้นฐานให้สัตว์เลี้ยงโดยไม่มีค่าใช้จ่าย</p></div>
+      <div class="card"><h3>ฝังไมโครชิป</h3><p>บริการฝังไมโครชิประบุตัวตน ช่วยติดตามและพาสัตว์กลับบ้านได้หากพลัดหลง</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- NEW: TRIAL FOSTERING -->
+<section id="trial" class="alt">
+  <div class="wrap">
+    <h2>ทดลองเลี้ยงก่อนตัดสินใจจริง</h2>
+    <p>ก่อนรับสัตว์มาเลี้ยงถาวร ผู้สนใจสามารถเลือกทดลองดูแลสัตว์ในระยะเวลาสั้น ๆ เพื่อประเมินความพร้อมของตนเองก่อนตัดสินใจรับเลี้ยงในระยะยาว</p>
+    <div class="grid4">
+      <div class="card" style="text-align:center;"><h3 style="margin-bottom:4px;">3 วัน</h3><p style="margin:0;">ทำความคุ้นเคยเบื้องต้น</p></div>
+      <div class="card" style="text-align:center;"><h3 style="margin-bottom:4px;">7 วัน</h3><p style="margin:0;">ลองใช้ชีวิตร่วมกันหนึ่งสัปดาห์</p></div>
+      <div class="card" style="text-align:center;"><h3 style="margin-bottom:4px;">15 วัน</h3><p style="margin:0;">ประเมินความพร้อมระยะกลาง</p></div>
+      <div class="card" style="text-align:center;"><h3 style="margin-bottom:4px;">30 วัน</h3><p style="margin:0;">ทดลองดูแลเต็มรูปแบบหนึ่งเดือน</p></div>
+    </div>
+    <p style="margin-top:28px; color:var(--brown); font-weight:500;">ไม่ว่าจะเลือกระยะเวลาใด เป้าหมายคือการให้ทั้งคนและสัตว์ได้ทำความรู้จักกันก่อนตัดสินใจรับเลี้ยงอย่างถาวร</p>
+  </div>
+</section>
+
+<!-- 8 TAKE ACTION -->
+<section id="action" class="alt">
+  <div class="wrap">
+    <h2>ก่อนรับมาเลี้ยง ลองถามตัวเองว่าเราพร้อมดูแลเขาไปตลอดชีวิตหรือยัง</h2>
+    <p>การป้องกันการทอดทิ้งสัตว์เริ่มต้นจากการตัดสินใจของเราเอง ก่อนรับสุนัขหรือแมวมาเลี้ยง ลองประเมินความพร้อมของตนเองทั้งในปัจจุบันและอนาคต เพราะสัตว์เลี้ยงต้องการการดูแลอย่างต่อเนื่อง ไม่ใช่เฉพาะในวันที่เราสะดวก</p>
+
+    <h3 style="margin-top:40px;">แบบทดสอบความพร้อมก่อนเลี้ยงสัตว์</h3>
+    <form class="quiz-form" id="quizForm">
+      <div class="q-item"><p>1. ฉันมีเวลาสำหรับให้อาหาร ทำความสะอาด และดูแลสัตว์เลี้ยงเป็นประจำ</p>
+        <div class="opts"><input type="radio" id="q1a" name="q1" value="ready"><label for="q1a">พร้อม</label><input type="radio" id="q1b" name="q1" value="unsure"><label for="q1b">ยังไม่แน่ใจ</label><input type="radio" id="q1c" name="q1" value="notready"><label for="q1c">ยังไม่พร้อม</label></div></div>
+      <div class="q-item"><p>2. ฉันสามารถวางแผนค่าอาหาร อุปกรณ์ และค่าใช้จ่ายในการรักษาพยาบาลได้</p>
+        <div class="opts"><input type="radio" id="q2a" name="q2" value="ready"><label for="q2a">พร้อม</label><input type="radio" id="q2b" name="q2" value="unsure"><label for="q2b">ยังไม่แน่ใจ</label><input type="radio" id="q2c" name="q2" value="notready"><label for="q2c">ยังไม่พร้อม</label></div></div>
+      <div class="q-item"><p>3. ที่อยู่อาศัยของฉันเหมาะสมและอนุญาตให้เลี้ยงสัตว์ได้</p>
+        <div class="opts"><input type="radio" id="q3a" name="q3" value="ready"><label for="q3a">พร้อม</label><input type="radio" id="q3b" name="q3" value="unsure"><label for="q3b">ยังไม่แน่ใจ</label><input type="radio" id="q3c" name="q3" value="notready"><label for="q3c">ยังไม่พร้อม</label></div></div>
+      <div class="q-item"><p>4. ฉันพร้อมดูแลสัตว์เลี้ยงเมื่อเจ็บป่วยหรือมีอายุมากขึ้น</p>
+        <div class="opts"><input type="radio" id="q4a" name="q4" value="ready"><label for="q4a">พร้อม</label><input type="radio" id="q4b" name="q4" value="unsure"><label for="q4b">ยังไม่แน่ใจ</label><input type="radio" id="q4c" name="q4" value="notready"><label for="q4c">ยังไม่พร้อม</label></div></div>
+      <div class="q-item"><p>5. ฉันเข้าใจว่าการเลี้ยงสัตว์เป็นความรับผิดชอบระยะยาว</p>
+        <div class="opts"><input type="radio" id="q5a" name="q5" value="ready"><label for="q5a">พร้อม</label><input type="radio" id="q5b" name="q5" value="unsure"><label for="q5b">ยังไม่แน่ใจ</label><input type="radio" id="q5c" name="q5" value="notready"><label for="q5c">ยังไม่พร้อม</label></div></div>
+      <div class="q-item"><p>6. คนในครอบครัวหรือผู้ที่อาศัยอยู่ร่วมกันเห็นด้วยกับการเลี้ยงสัตว์</p>
+        <div class="opts"><input type="radio" id="q6a" name="q6" value="ready"><label for="q6a">พร้อม</label><input type="radio" id="q6b" name="q6" value="unsure"><label for="q6b">ยังไม่แน่ใจ</label><input type="radio" id="q6c" name="q6" value="notready"><label for="q6c">ยังไม่พร้อม</label></div></div>
+      <div class="q-item"><p>7. ฉันมีแผนรองรับหากเกิดการเปลี่ยนแปลงด้านเวลา รายได้ หรือที่อยู่อาศัย</p>
+        <div class="opts"><input type="radio" id="q7a" name="q7" value="ready"><label for="q7a">พร้อม</label><input type="radio" id="q7b" name="q7" value="unsure"><label for="q7b">ยังไม่แน่ใจ</label><input type="radio" id="q7c" name="q7" value="notready"><label for="q7c">ยังไม่พร้อม</label></div></div>
+
+      <div class="btn-row">
+        <button type="button" id="quizSubmit" class="btn btn-primary">ดูผลการประเมิน</button>
+        <button type="button" id="quizReset" class="btn btn-outline">ทำแบบทดสอบอีกครั้ง</button>
+      </div>
+      <div id="quizResult" class="quiz-result" hidden role="status"></div>
+      <p class="quiz-disclaimer">แบบทดสอบนี้เป็นเพียงการประเมินเบื้องต้น ไม่ใช่การรับรองว่าผู้ทำแบบทดสอบพร้อมเลี้ยงสัตว์อย่างสมบูรณ์</p>
+    </form>
+
+    <div class="share-row">
+      <h3>ร่วมส่งต่อความรู้</h3>
+      <p>การเปลี่ยนแปลงอาจเริ่มต้นจากการแบ่งปันเรื่องราวเล็ก ๆ ให้คนรอบตัวเข้าใจว่า การรับสัตว์มาเลี้ยงคือความรับผิดชอบระยะยาว</p>
+      <div class="btn-row">
+        <button type="button" id="shareBtn" class="btn btn-primary">แชร์แคมเปญ</button>
+        <a href="#about" class="btn btn-outline">กลับไปอ่านข้อมูล</a>
+      </div>
+      <p id="share-status" aria-live="polite"></p>
+      <p class="ref-note">โปสเตอร์สำหรับดาวน์โหลดยังอยู่ระหว่างจัดเตรียม — ปุ่มดาวน์โหลดจะเปิดใช้งานเมื่อมีไฟล์จริง</p>
+    </div>
+
+    <p style="margin-top:40px; font-family:'Mitr',sans-serif; color:var(--brown); font-size:1.15rem;">คิดก่อนเลี้ยง – วางแผนก่อนรับ – รับผิดชอบจนถึงวันสุดท้าย</p>
+    <p style="font-style:italic;">“เพราะความรักที่แท้จริง ไม่ได้อยู่แค่วันที่เราเลือกเขา แต่อยู่ในทุกวันที่เรายังดูแลเขา”</p>
+  </div>
+</section>
+
+<!-- 9 REFERENCES -->
+<section id="references">
+  <div class="wrap">
+    <h2>แหล่งข้อมูลสำหรับการศึกษาเพิ่มเติม</h2>
+    <div class="ref-card"><p>1. World Organisation for Animal Health (WOAH). <em>Dog Population Management</em>, Terrestrial Animal Health Code, Chapter 7.7.</p></div>
+    <div class="ref-card"><p>2. World Health Organization (WHO). <em>Rabies — South-East Asia Region</em>.</p></div>
+    <div class="ref-card"><p>3. World Health Organization (WHO). (2016). <em>Global framework to eliminate human rabies transmitted by dogs by 2030</em>.</p></div>
+    <p class="ref-note">URL และรายละเอียดบรรณานุกรมจะเพิ่มหลังตรวจสอบจากแหล่งต้นฉบับโดยตรง</p>
+  </div>
+</section>
+
+<!-- 10 CREDITS & AI DISCLOSURE -->
+<section id="credits" class="alt">
+  <div class="wrap">
+    <h2>เครดิตและความโปร่งใสในการจัดทำเว็บไซต์</h2>
+    <div class="disclosure">
+      <dl>
+        <dt>การเปิดเผยการใช้ Generative AI</dt>
+        <dd>เครื่องมือที่ใช้: ChatGPT</dd>
+        <dt>จุดประสงค์</dt>
+        <dd>สนับสนุนการจัดโครงสร้างรายงาน การเรียบเรียงภาษา และการพัฒนาแนวทางการนำเสนอแคมเปญจากข้อมูลและแนวคิดที่กลุ่มกำหนด</dd>
+        <dt>วิธีตรวจสอบและปรับแก้</dt>
+        <dd>สมาชิกกลุ่มตรวจสอบความถูกต้อง ความเหมาะสม และปรับแก้เนื้อหาก่อนนำไปใช้ในรายงานและเว็บไซต์ฉบับส่งจริง รวมทั้งตรวจสอบแหล่งอ้างอิงด้วยตนเอง</dd>
+      </dl>
+    </div>
+    <div class="placeholder">เครดิตสื่อ: จะระบุแหล่งที่มาของภาพถ่าย ภาพประกอบ โลโก้ กราฟิก วิดีโอ และเสียง เมื่อมีการเลือกใช้สื่อจริงในเว็บไซต์</div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <h3>รักแล้วอย่าทิ้ง (A Pet Is for Life)</h3>
+    <p>ร่วมสร้างสังคมที่เข้าใจและรับผิดชอบต่อสัตว์เลี้ยง เพราะทุกชีวิตสมควรได้รับการดูแลอย่างเหมาะสม</p>
+    <ul class="foot-links">
+      <li><a href="#about">ทำความรู้จักกับปัญหา</a></li>
+      <li><a href="#action">พร้อมเลี้ยงจริงหรือยัง?</a></li>
+      <li><a href="#references">แหล่งอ้างอิง</a></li>
+      <li><a href="#credits">เครดิตและการเปิดเผยการใช้ AI</a></li>
+    </ul>
+    <div class="foot-bottom">
+      <p style="margin:0;">GE105 Global Alliance and Emerging Issues · ข้อมูลผู้จัดทำจะเพิ่มเมื่อสมาชิกกลุ่มยืนยันข้อมูลครบถ้วน</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var toggle=document.getElementById('navToggle');
+  var list=document.getElementById('navList');
+  toggle.addEventListener('click',function(){
+    var open=list.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', open ? 'true':'false');
+  });
+  list.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click',function(){ list.classList.remove('open'); toggle.setAttribute('aria-expanded','false'); });
+  });
+
+  var qs=['q1','q2','q3','q4','q5','q6','q7'];
+  var result=document.getElementById('quizResult');
+  document.getElementById('quizSubmit').addEventListener('click',function(){
+    var answers=[];
+    for(var i=0;i<qs.length;i++){
+      var checked=document.querySelector('input[name="'+qs[i]+'"]:checked');
+      if(!checked){ answers=null; break; }
+      answers.push(checked.value);
+    }
+    result.hidden=false;
+    if(!answers){
+      result.textContent='กรุณาตอบให้ครบทุกข้อก่อนดูผลประเมิน';
+      result.className='quiz-result warn';
+      return;
+    }
+    if(answers.indexOf('notready')!==-1){
+      result.textContent='ไม่เป็นไร การรอจนกว่าจะพร้อมเป็นการตัดสินใจที่รับผิดชอบ ลองวางแผนในส่วนที่ยังขาดก่อน';
+      result.className='quiz-result result-c';
+    } else if(answers.indexOf('unsure')!==-1){
+      result.textContent='ลองทบทวนเรื่องที่ยังไม่แน่ใจ และหาข้อมูลเพิ่มเติมก่อนตัดสินใจ';
+      result.className='quiz-result result-b';
+    } else {
+      result.textContent='คุณได้พิจารณาความพร้อมในหลายด้านแล้ว ขั้นต่อไปคือวางแผนการดูแลให้เหมาะสมก่อนรับสัตว์มาเลี้ยง';
+      result.className='quiz-result result-a';
+    }
+    result.scrollIntoView({behavior:'smooth',block:'center'});
+  });
+  document.getElementById('quizReset').addEventListener('click',function(){
+    document.querySelectorAll('#quizForm input[type=radio]').forEach(function(r){ r.checked=false; });
+    result.hidden=true;
+  });
+
+  var shareStatus=document.getElementById('share-status');
+  document.getElementById('shareBtn').addEventListener('click', async function(){
+    try{
+      if(navigator.share){
+        await navigator.share({title:'รักแล้วอย่าทิ้ง · A Pet Is for Life', text:'สัตว์เลี้ยงไม่ใช่ของเล่น แต่เป็นหนึ่งชีวิตที่ต้องรับผิดชอบจนถึงวันสุดท้าย', url: location.href});
+      } else if(navigator.clipboard){
+        await navigator.clipboard.writeText(location.href);
+        shareStatus.textContent='คัดลอกลิงก์แคมเปญแล้ว ✓';
+      } else {
+        shareStatus.textContent='กรุณาคัดลอกลิงก์จากแถบที่อยู่ด้านบน';
+      }
+    }catch(e){
+      shareStatus.textContent='';
+    }
+  });
+})();
+</script>
+</body>
+</html>
